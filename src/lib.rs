@@ -1,7 +1,7 @@
 pub struct Solver {
     f: Box<dyn Fn(f64, Vec<f64>)-> Vec<f64>>,
-    y: Box<Vec<f64>>,
-    t: f64,
+    pub y: Box<Vec<f64>>,
+    pub t: f64,
     h: f64,
 }
 
