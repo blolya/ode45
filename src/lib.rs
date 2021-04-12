@@ -1,4 +1,4 @@
-struct Solver {
+pub struct Solver {
     f: Box<dyn Fn(f64, Vec<f64>)-> Vec<f64>>,
     y: Box<Vec<f64>>,
     t: f64,
@@ -6,7 +6,7 @@ struct Solver {
 }
 
 impl Solver {
-    fn new(f: impl Fn(f64, Vec<f64>) -> Vec<f64> + 'static, t0: f64, y0: Vec<f64>, tk: f64) -> Solver {
+    pub fn new(f: impl Fn(f64, Vec<f64>) -> Vec<f64> + 'static, t0: f64, y0: Vec<f64>, tk: f64) -> Solver {
         let mut s = Solver {
             f: Box::new(f),
             y: Box::new(y0),
@@ -55,14 +55,4 @@ impl Solver {
         self.y = Box::new(y);
         self.t += self.h;
     }
-}
-
-
-
-fn main() {
-    let f: fn(f64, Vec<f64>) -> Vec<f64> = |t: f64, y: Vec<f64>| -> Vec<f64> { vec![ y[3], y[4], y[5], 9.81, 0.0, 0.0 ] };
-
-    let solver = Solver::new( f, 0.0, vec![0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 1.0 );
-
-    println!("{:?}", solver.y);
 }
